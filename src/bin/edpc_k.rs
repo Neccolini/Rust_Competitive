@@ -17,21 +17,21 @@ fn reverse(t:String)->String {
 
 fn main() {
     input!{
-        N:usize,K:usize,
-        a:[usize;N],
+        n:usize,k:usize,
+        a:[usize;n],
     }
     // dp[x]:=のこりx個のときに自分が勝つかどうか
-    let mut dp = vec![false;K+10];
+    let mut dp = vec![false;k+10];
     //ループを逆にするとWA
     //
-    for j in 0..=K {
-        for i in 0..N {
+    for j in 0..=k {
+        for i in 0..n {
             if j >= a[i] {
                 dp[j] |= !dp[j-a[i]];
             }
         }
     }
-    if dp[K] == true{
+    if dp[k] == true{
         println!("First");
     }else{
         println!("Second");

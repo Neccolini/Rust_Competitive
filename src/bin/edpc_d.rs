@@ -17,23 +17,23 @@ fn reverse(t:String)->String {
 
 fn main() {
     input!{
-        N:usize, W:usize,
-        wv:[(usize,usize);N],
+        n:usize, w:usize,
+        wv:[(usize,usize);n],
     }
 
-    let mut dp = vec![vec![0;W+10];N+10];
-    for i in 0..N {
-        for i_w in 0..W {
+    let mut dp = vec![vec![0;w+10];n+10];
+    for i in 0..n {
+        for i_w in 0..w {
             let (weight, value) = wv[i];
             dp[i+1][i_w] = max(dp[i+1][i_w], dp[i][i_w]);
-            if i_w + weight<=W {
+            if i_w + weight<=w {
                 dp[i+1][i_w+weight] = max(dp[i+1][i_w], dp[i][i_w] + value);
             }
         }
     }
     let mut ans = 0;
-    for i in 0..=W {
-        ans = max(ans, dp[N][i]);
+    for i in 0..=w {
+        ans = max(ans, dp[n][i]);
     }
     println!("{}", ans);
 }
