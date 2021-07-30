@@ -1,1 +1,0 @@
-command: cargo run --bin <filename(do not include extension)>
