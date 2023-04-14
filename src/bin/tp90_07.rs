@@ -1,21 +1,21 @@
 //cargo run --bin
 #![allow(unused_imports)]
-use std::cmp::*;
-use std::collections::*;
 use itertools::Itertools;
 use num::clamp;
-use proconio::{input, marker::*, fastout};
+use proconio::{fastout, input, marker::*};
+use std::cmp::*;
+use std::collections::*;
 use superslice::*;
 #[allow(non_snake_case)]
 #[allow(non_upper_case_globals)]
 #[allow(non_camel_case_types)]
 #[allow(unused_variables)]
 #[allow(dead_code)]
-const MOD:i64 = 1000000007;
+const MOD: i64 = 1000000007;
 #[allow(dead_code)]
-const MAX:usize = 100010;
+const MAX: usize = 100010;
 #[allow(dead_code)]
-const INF:i64 = (1<<62) - (1<<31);
+const INF: i64 = (1 << 62) - (1 << 31);
 
 fn b_search(a: &Vec<i64>, x: i64) -> i64 {
     let (mut left, mut right) = (0, a.len() - 1);
@@ -24,8 +24,7 @@ fn b_search(a: &Vec<i64>, x: i64) -> i64 {
         mid = (left + right) / 2;
         if x < a[mid] {
             right = mid;
-        }
-        else {
+        } else {
             left = mid;
         }
     }
@@ -33,14 +32,14 @@ fn b_search(a: &Vec<i64>, x: i64) -> i64 {
 }
 
 fn main() {
-    input!{
+    input! {
         n:usize,
         mut a:[i64;n],
         q: usize
     }
     a.sort();
     for _ in 0..q {
-        input!{b:i64}
-        println!("{}",b_search(&a, b));
+        input! {b:i64}
+        println!("{}", b_search(&a, b));
     }
 }

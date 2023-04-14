@@ -1,30 +1,30 @@
 //cargo run --bin
 #![allow(unused_imports)]
-use std::cmp::*;
-use std::collections::*;
 use itertools::Itertools;
 use num::clamp;
-use proconio::{input, marker::*, fastout};
+use proconio::{fastout, input, marker::*};
+use std::cmp::*;
+use std::collections::*;
 use superslice::*;
 #[allow(non_snake_case)]
 #[allow(non_upper_case_globals)]
 #[allow(non_camel_case_types)]
 #[allow(unused_variables)]
 #[allow(dead_code)]
-const MOD:i64 = 1000000007;
+const MOD: i64 = 1000000007;
 #[allow(dead_code)]
-const MAX:usize = 100010;
+const MAX: usize = 100010;
 #[allow(dead_code)]
-const INF:i64 = (1<<62) - (1<<31);
+const INF: i64 = (1 << 62) - (1 << 31);
 
 pub struct SCC<'a> {
     g: &'a [Vec<usize>],
     r_g: Vec<Vec<usize>>,
     post_order: VecDeque<usize>,
     used: Vec<bool>,
-    pub order: Vec<usize>
+    pub order: Vec<usize>,
 }
-impl <'a> SCC<'a> {
+impl<'a> SCC<'a> {
     pub fn new(g: &'a [Vec<usize>]) -> Self {
         let n = g.len();
         let mut r_g = vec![vec![]; n];
@@ -81,13 +81,13 @@ impl <'a> SCC<'a> {
 }
 
 fn main() {
-    input!{
+    input! {
         n:usize, m:usize,
     }
-    let mut g = vec![vec![];n];
+    let mut g = vec![vec![]; n];
     for _ in 0..m {
         input! { a:usize, b:usize }
-        g[a-1].push(b-1);
+        g[a - 1].push(b - 1);
     }
     let mut scc = SCC::new(&g);
     scc.build();
@@ -95,9 +95,9 @@ fn main() {
     for i in 0..n {
         *map.entry(scc.order[i]).or_insert(0) += 1;
     }
-    let mut cnt:i64 = 0;
+    let mut cnt: i64 = 0;
     for (_, v) in map {
-        cnt += v * (v-1) / 2;
+        cnt += v * (v - 1) / 2;
     }
     println!("{}", cnt);
 }
